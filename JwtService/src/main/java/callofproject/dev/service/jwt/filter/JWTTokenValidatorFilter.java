@@ -38,9 +38,10 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter
 
                 System.out.println("jwt service username: " + username);
 
-                //var authorities = (String) claims.get("authorities");
-                //System.out.println(authorities);
-                var auth = new UsernamePasswordAuthenticationToken(username, null);
+                var authorities = (String) JwtUtil.extractRoles(jwt);
+                System.out.println(authorities);
+                var auth = new UsernamePasswordAuthenticationToken(username, null, AuthorityUtils.
+                        commaSeparatedStringToAuthorityList(authorities));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (Exception e)
             {

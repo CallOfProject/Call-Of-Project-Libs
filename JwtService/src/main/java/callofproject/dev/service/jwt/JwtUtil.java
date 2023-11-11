@@ -25,6 +25,12 @@ public final class JwtUtil
         return extractClaim(token, Claims::getSubject);
     }
 
+    public static String extractRoles(String token)
+    {
+        var claims = extractAllClaims(token);
+        return (String) claims.get("authorities");
+    }
+
     public static <T> T extractClaim(String token, Function<Claims, T> claimsResolver)
     {
         final Claims claims = extractAllClaims(token);
