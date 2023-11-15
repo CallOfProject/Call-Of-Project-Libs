@@ -31,6 +31,12 @@ public final class JwtUtil
         return (String) claims.get("authorities");
     }
 
+    public static String extractUuid(String token)
+    {
+        var claims = extractAllClaims(token);
+        return (String) claims.get("uuid");
+    }
+
     public static <T> T extractClaim(String token, Function<Claims, T> claimsResolver)
     {
         final Claims claims = extractAllClaims(token);

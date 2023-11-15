@@ -27,7 +27,6 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter
 
             var map = new HashMap<String, Object>();
             map.put("authorities", claims);
-            System.out.println("claims: " + claims);
             var jwt = JwtUtil.generateToken(map, authentication.getName());
             response.setHeader("Authorization", jwt);
         }
